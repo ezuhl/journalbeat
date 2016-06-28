@@ -3,7 +3,9 @@ MAINTAINER http://www.centos.org
 LABEL Vendor="CentOS"
 LABEL License=GPLv2
 LABEL Version=2.4.6-31
-VOLUME /app/go
+WORKDIR /app/go
+VOLUME ["/app/go"]
+#ADD . /app/go
 RUN yum -y update && yum clean all
 RUN yum -y install git
 RUN yum -y install gcc
@@ -22,6 +24,7 @@ ENV GOPATH /app/go
 ENV GOROOT /usr/local/go
 ENV GOBIN $GOPATH/bin
 ENV PATH $PATH:/usr/bin/go:$GOPATH/bin
-WORKDIR /app/go
-RUN go get -d -v
-RUN go build
+#WORKDIR /app/go
+#RUN /bin/bash -c 'cd /app/go; go get; go build;'
+ENTRYPOINT ["/bin/bash", "-c"]
+CMD ["go get","go build"]
