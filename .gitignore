@@ -24,3 +24,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /.idea
+/bin
+/pkg
+/src
+/etc/journalbeat.yml
